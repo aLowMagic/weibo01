@@ -27,7 +27,7 @@ class Weibo01Pipeline(object):
         cur = conn.cursor()
         try:
             sql = 'insert into texts(userid, content, url_id, source_id) values(\'%s\', \'%s\', \'%s\', \'%s\');'\
-                  %(item['userid'], item['content'], item['url_id'], item['source_id'])
+                  %(str(item['userid']), item['content'], str(item['url_id']), str(item['source_id']))
             cur.execute(sql)
             conn.commit()
         except:
@@ -40,7 +40,7 @@ class Weibo01Pipeline(object):
         try:
             picUrls = item['picsUrl']
             if len(picUrls) != 0:
-                rootPath = 'E:\\file\\GitHub\\weibo01\\picsData\\'+item['url_id']
+                rootPath = 'E:\\file\\GitHub\\picsData\\'+item['url_id']
                 if not os.path.exists(rootPath):
                     os.makedirs(rootPath)
                 for num in range(len(picUrls)):
