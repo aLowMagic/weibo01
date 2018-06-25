@@ -26,9 +26,7 @@ class spider0(scrapy.Spider):
             id = item['mblog']['id']
             scrollId = data[0]['next_cursor']
 
-            if id in self.visited:
-                pass
-            else:
+            if id not in self.visited:
                 self.visited.add(id)
                 urlPage = 'https://m.weibo.cn/status/%s' % id
                 yield scrapy.Request(url=urlPage, cookies=self.cookie, callback=self.parsePage)
